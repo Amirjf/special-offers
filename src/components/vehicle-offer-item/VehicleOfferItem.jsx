@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Tippy from '@tippyjs/react';
 import InfoIcon from '../../assets/icons/info.svg';
-import ChevUp from '../../assets/icons/chevron-up.svg';
-import ChevDown from '../../assets/icons/chevron-down.svg';
+import { ReactComponent as ChevUp } from '../../assets/icons/chevron-up.svg';
+import { ReactComponent as ChevDown } from '../../assets/icons/chevron-down.svg';
 import VehicleDisclaimer from '../vehicle-disclaimer/VehicleDisclaimer';
 import 'tippy.js/dist/tippy.css';
 
 const VehicleOfferItem = ({ offer }) => {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
 
-  const { image, year, make, model, price, title } = offer;
+  const { image, year, make, model, price } = offer;
 
   const showDislaimer = () => {
     setShowDisclaimer(!showDisclaimer);
@@ -22,7 +22,7 @@ const VehicleOfferItem = ({ offer }) => {
         </div>
         <div className="flex flex-col w-full justify-center">
           <div className="w-full pb-6">
-            <div className="text-xl font-normal">{title}</div>
+            <div className="text-xl font-normal">{`${year} ${make} ${model}`}</div>
             <div>
               Starting at <span className="font-semibold">{price}</span>
             </div>
@@ -71,8 +71,10 @@ const VehicleOfferItem = ({ offer }) => {
               onClick={showDislaimer}
               className="ml-auto cursor-pointer flex items-center justify-center text-center w-full md:w-auto  my-5"
             >
-              <button className="text-lg  text-[#2e7cbe]">Offer Details</button>
-              <img width={25} src={showDisclaimer ? ChevUp : ChevDown} />
+              <button className="text-lg text-[#2e7cbe]">Offer Details</button>
+              <span className="text-[#2e7cbe] pt-1 pl-1 ">
+                {showDisclaimer ? <ChevUp /> : <ChevDown />}
+              </span>
             </div>
           </div>
         </div>

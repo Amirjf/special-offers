@@ -1,23 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import VehicleOfferItem from '../vehicle-offer-item/VehicleOfferItem';
-import OFFERS from '../../../data/OFFERS.json';
+import { OffersContext } from '../../context/OffersContext';
 const NewVehiclesOffers = () => {
-  const [offerData, setOfferData] = useState(OFFERS);
-  const handleFilter = () => {
-    const updatedOffers = offerData.filter((offer) => {
-      if (offer.model === 'Mustang') {
-        return offer;
-      }
-    });
-    setOfferData(updatedOffers);
-  };
+  const { offerData, filteredOffers } = useContext(OffersContext);
 
   return (
     <>
-      <button onClick={handleFilter} className="p-4 bg-fuchsia-600 text-white">
-        FILTER
-      </button>
-      {offerData.map((offer) => (
+      {filteredOffers.map((offer) => (
         <VehicleOfferItem key={offer.id} offer={offer} />
       ))}
     </>
