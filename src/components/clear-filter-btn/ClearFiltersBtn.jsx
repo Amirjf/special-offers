@@ -3,13 +3,9 @@ import Button from '../button/Button';
 import { OffersContext } from '../../context/OffersContext';
 
 const ClearFiltersBtn = () => {
-  const {
-    isAnyFilterApplied,
-    filters,
-    offerData,
-    setFilteredOffers,
-    setFilters,
-  } = useContext(OffersContext);
+  const { isAnyFilterApplied, offerData, setFilteredOffers, setFilters } =
+    useContext(OffersContext);
+
   const handleClearingFilters = () => {
     setFilteredOffers(offerData);
     setFilters({});
@@ -19,7 +15,7 @@ const ClearFiltersBtn = () => {
     <>
       {isAnyFilterApplied() ? (
         <div>
-          <Button variant="secondary" fullWidth onClick={handleClearingFilters}>
+          <Button variant="text" fullWidth onClick={handleClearingFilters}>
             Clear filters
           </Button>
         </div>

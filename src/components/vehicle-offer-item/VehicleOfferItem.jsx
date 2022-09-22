@@ -15,7 +15,7 @@ const VehicleOfferItem = ({ offer }) => {
     setShowDisclaimer(!showDisclaimer);
   };
   return (
-    <div className="border-b-2 py-5">
+    <div className="border-b-1 py-5">
       <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-1/2 md:pr-5">
           <img className="w-full" src={image} />

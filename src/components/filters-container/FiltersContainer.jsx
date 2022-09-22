@@ -5,7 +5,7 @@ import YearFilter from '../year-filter/YearFilter';
 
 const FiltersContainer = ({ selectedFilter }) => {
   return (
-    <div className="w-full max-h-[42vh] mt-5 overflow-hidden overflow-y-auto px-2">
+    <div className="w-full max-h-[70vh] md:max-h-[42vh] mt-5 overflow-hidden overflow-y-auto px-2">
       {selectedFilter === 'bodyStyle' && <BodyFilter />}
       {selectedFilter === 'model' && <ModelFilter />}
       {selectedFilter === 'year' && <YearFilter />}

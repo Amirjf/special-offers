@@ -20,7 +20,7 @@ const YearFilter = () => {
   return (
     <div>
       <FilterContentHeading title="Year" />
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-2 md:grid-cols-3">
         {getYears.map((year, idx) => {
           const yearVal = year.toString();
           return (

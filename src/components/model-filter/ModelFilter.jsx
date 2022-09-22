@@ -19,7 +19,7 @@ const ModelFilter = () => {
   return (
     <div>
       <FilterContentHeading title="Model" />
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-2 md:grid-cols-3">
         {getModels.map((model, idx) => {
           return (
             <div key={idx} className="pb-2">

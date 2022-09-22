@@ -12,7 +12,7 @@ const AppliedFilters = () => {
   };
 
   return (
-    <div className="mb-4 flex gap-x-3">
+    <div className="mb-0 md:mb-4 flex gap-3 flex-wrap">
       {getAppliedFilters?.map((filter) => {
         return (
           <>

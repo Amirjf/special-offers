@@ -9,7 +9,7 @@ export const cls = (input) =>
     .trim();
 
 const classes = {
-  base: 'focus:outline-none transition ease-in-out duration-300 flex items-center justify-center',
+  base: 'focus:outline-none transition ease-in-out duration-150 flex items-center justify-center',
   disabled: 'opacity-50 cursor-not-allowed',
   pill: 'rounded-full',
   fullWidth: 'w-full',
@@ -25,11 +25,11 @@ const classes = {
       'bg-gray-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 text-gray-900 hover:text-white',
     danger:
       'bg-red-500 hover:bg-red-800 focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 text-white',
-    outlined:
-      'border-1  border-gray-400 font-semibold hover:border-[#176db7] hover:text-[#176db7]',
+    outlined: 'border-1 border-gray-400 font-semibold hover:border-[#176db7]',
   },
   isActive: {
-    outlined: 'bg-[#176db7] text-white hover:bg-blue-400',
+    outlined:
+      'bg-[#176db7] hover:border-[#176db7] text-white hover:text-[#fff]',
     primary: 'bg-[#176db7]',
     secondary:
       'bg-gray-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 text-gray-900 hover:text-white',

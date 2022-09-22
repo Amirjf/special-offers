@@ -17,7 +17,7 @@ const Tabs = () => {
               <a
                 className={`text-xl break-words md:text-3xl inline-block leading-normal ${
                   openTab === 1
-                    ? 'text-blue-600 border-b-2 border-b-blue-600'
+                    ? 'text-blue-600 border-b-3 border-b-blue-600'
                     : 'text-gray-400'
                 }`}
                 onClick={(e) => {
