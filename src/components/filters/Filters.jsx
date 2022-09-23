@@ -6,16 +6,11 @@ import { ReactComponent as XIcon } from '../../assets/icons/x.svg';
 import ClearFiltersBtn from '../clear-filter-btn/ClearFiltersBtn';
 import AppliedFilters from '../applied-filters/AppliedFilters';
 import FilterContent from '../filter-content/FilterContent';
+import AppliedFilterNumbers from '../applied-filter-numbers/AppliedFilterNumbers';
 
 const Filters = () => {
-  const {
-    isAnyFilterApplied,
-    filters,
-    offerData,
-    setFilteredOffers,
-    setOnFiltersApplied,
-    handleApplyingFilters,
-  } = useContext(OffersContext);
+  const { isAnyFilterApplied, filters, handleApplyingFilters } =
+    useContext(OffersContext);
 
   const [showFilters, setShowFilters] = useState(false);
 
@@ -24,12 +19,14 @@ const Filters = () => {
   };
 
   return (
-    <div className="sticky top-0 py-5 bg-white">
+    <div className="sticky top-0 pt-5 bg-white">
       <div className="flex gap-5 mb-0 md:mb-5">
         <div>
           <Button
             variant="outlined"
-            icon={<FilterIcon />}
+            icon={
+              isAnyFilterApplied() ? <AppliedFilterNumbers /> : <FilterIcon />
+            }
             onClick={handleShowFilterDrawer}
           >
             {showFilters ? 'Hide filters' : 'Show filters'}
@@ -65,8 +62,11 @@ const Filters = () => {
               <XIcon />
             </button>
           </div>
+
           <AppliedFilters />
+
           <FilterContent handleShowFilterDrawer={handleShowFilterDrawer} />
+
           <div className="flex justify-center m-4 md:hidden">
             <Button
               disabled={!isAnyFilterApplied()}
@@ -78,6 +78,7 @@ const Filters = () => {
             >
               Apply Filters
             </Button>
+
             <ClearFiltersBtn />
           </div>
         </div>

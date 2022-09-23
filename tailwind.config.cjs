@@ -6,12 +6,17 @@ module.exports = {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
+
     borderWidth: {
       1: '1px',
       2: '2px',
       3: '3px',
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#176db7',
+      },
+    },
   },
   plugins: [],
 };

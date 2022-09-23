@@ -15,24 +15,26 @@ const ModelFilter = () => {
     }
   };
 
-  const getModels = filteredOffers.map((offer) => offer.model);
+  const getModels = [...new Set(filteredOffers.map((offer) => offer.model))];
   return (
     <div>
       <FilterContentHeading title="Model" />
       <div className="grid grid-cols-2 md:grid-cols-3">
         {getModels.map((model, idx) => {
-          return (
-            <div key={idx} className="pb-2">
-              <Checkbox
-                onChange={handleChange}
-                label={model}
-                id={model}
-                name={model}
-                value={model}
-                checked={filters['model']?.includes(model) ? true : false}
-              />
-            </div>
-          );
+          if (model) {
+            return (
+              <div key={idx} className="pb-2">
+                <Checkbox
+                  onChange={handleChange}
+                  label={model}
+                  id={model}
+                  name={model}
+                  value={model}
+                  checked={filters['model']?.includes(model) ? true : false}
+                />
+              </div>
+            );
+          }
         })}
       </div>
     </div>

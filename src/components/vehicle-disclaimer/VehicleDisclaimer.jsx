@@ -1,15 +1,11 @@
 import React from 'react';
 
-const VehicleDisclaimer = () => {
+const VehicleDisclaimer = ({ content }) => {
   return (
-    <div>
+    <div className="mt-5">
+      <h3 className="font-semibold mb-5">Lease disclaimer</h3>
       <hr className="pb-2 w-8" />
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-        assumenda sunt natus optio odit, eveniet quasi officiis et earum laborum
-        dolorem rerum quod possimus veritatis dolores ipsam pariatur inventore
-        ullam.
-      </p>
+      <p className="text-[16px] font-regular text-justify">{content}</p>
     </div>
   );
 };

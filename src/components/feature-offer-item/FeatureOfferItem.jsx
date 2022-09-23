@@ -22,7 +22,7 @@ const FeatureOfferItem = () => {
         <span>for 36 months. $3,933 due at signing</span>
       </div>
       <div className="text-center pt-4">
-        <button className="text-sm  text-[#2e7cbe]">Offer Details</button>
+        <button className="text-sm  text-primary">Offer Details</button>
       </div>
     </div>
   );

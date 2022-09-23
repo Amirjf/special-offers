@@ -6,8 +6,8 @@ const NewVehiclesOffers = () => {
 
   return (
     <>
-      {filteredOffers.map((offer) => (
-        <VehicleOfferItem key={offer.id} offer={offer} />
+      {filteredOffers.map((offer, idx) => (
+        <VehicleOfferItem key={`${offer.name}-${idx}`} offer={offer} />
       ))}
     </>
   );

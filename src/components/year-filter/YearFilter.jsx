@@ -23,18 +23,20 @@ const YearFilter = () => {
       <div className="grid grid-cols-2 md:grid-cols-3">
         {getYears.map((year, idx) => {
           const yearVal = year.toString();
-          return (
-            <div key={idx} className="pb-2">
-              <Checkbox
-                onChange={handleChange}
-                label={yearVal}
-                id={yearVal}
-                name={yearVal}
-                value={yearVal}
-                checked={filters['year']?.includes(yearVal) ? true : false}
-              />
-            </div>
-          );
+          if (yearVal) {
+            return (
+              <div key={idx} className="pb-2">
+                <Checkbox
+                  onChange={handleChange}
+                  label={yearVal}
+                  id={yearVal}
+                  name={yearVal}
+                  value={yearVal}
+                  checked={filters['year']?.includes(yearVal) ? true : false}
+                />
+              </div>
+            );
+          }
         })}
       </div>
     </div>

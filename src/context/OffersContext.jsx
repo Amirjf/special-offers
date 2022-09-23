@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import OFFERS from '../../data/OFFERS.json';
+import OFFERS from '../../data/OFFERS2.json';
 import { addFilter, removeFilter } from './utils/utils';
 import queryString from 'query-string';
 
@@ -10,14 +10,20 @@ export const OffersProvider = ({ children }) => {
   const [offerData, setOfferData] = useState(OFFERS);
   const [filteredOffers, setFilteredOffers] = useState(OFFERS);
   const [onFiltersApplied, setOnFiltersApplied] = useState(false);
-
+  const [isAppliedFiltersByUrl, setIsAppliedFiltersByUrl] = useState({});
   const addFilters = (filterToAdd) => {
     setFilters((currentFilters) => addFilter(currentFilters, filterToAdd));
+  };
+  const addFakeFilters = (filterToAdd) => {
+    setIsAppliedFiltersByUrl((currentFilters) =>
+      addFilter(currentFilters, filterToAdd)
+    );
   };
 
   const isAnyFilterApplied = () => {
     const params = window.location.search;
-    if (params.length || Object.values(filters).length) {
+
+    if (params.length || Object.values(filters).flat().length) {
       return true;
     } else {
       return false;
@@ -33,8 +39,13 @@ export const OffersProvider = ({ children }) => {
 
     const getAppliedYears = filters.year;
 
+    const getAppliedBodyStyles = filters.body;
+    const getAppliedTypes = filters.type;
+
     if (getAppliedModels) {
-      result = result.filter((offer) => getAppliedModels.includes(offer.model));
+      result = result.filter((offer) =>
+        getAppliedModels?.includes(offer.model)
+      );
     }
 
     if (getAppliedYears) {
@@ -42,8 +53,18 @@ export const OffersProvider = ({ children }) => {
         getAppliedYears.includes(offer.year.toString())
       );
     }
+    if (getAppliedBodyStyles) {
+      result = result.filter((offer) =>
+        getAppliedBodyStyles.includes(offer.body_style.toString())
+      );
+    }
+    if (getAppliedTypes) {
+      result = result.filter((offer) =>
+        getAppliedTypes.includes(offer.type.toString())
+      );
+    }
+
     setFilteredOffers(result);
-    handleShowFilterDrawer();
     setOnFiltersApplied(!onFiltersApplied);
   };
 
@@ -54,14 +75,34 @@ export const OffersProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (isAnyFilterApplied()) {
-      const shallowEncoded = queryString.stringify(filters, {
-        arrayFormat: 'comma',
-      });
-
-      window.history.pushState({}, 'filters', '?' + shallowEncoded);
+    const filterParams = queryString.parse(window.location.search, {
+      arrayFormat: 'comma',
+    });
+    if (Object.values(filterParams).length) {
+      for (const [key, values] of Object.entries(filterParams)) {
+        if (Array.isArray(values)) {
+          values.map((filterVal) => {
+            addFilters({ key: key, value: filterVal });
+            addFakeFilters({ key: key, value: filterVal });
+          });
+        } else {
+          addFilters({ key: key, value: values });
+          addFakeFilters({ key: key, value: values });
+        }
+      }
     }
-  }, [onFiltersApplied]);
+  }, []);
+
+  useEffect(() => {
+    handleApplyingFilters();
+  }, [isAppliedFiltersByUrl]);
+
+  useEffect(() => {
+    const shallowEncoded = queryString.stringify(filters, {
+      arrayFormat: 'comma',
+    });
+    window.history.pushState({}, 'filters', '?' + shallowEncoded);
+  }, [filters]);
 
   const value = {
     offerData,

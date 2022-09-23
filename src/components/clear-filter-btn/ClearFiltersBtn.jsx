@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Button from '../button/Button';
 import { OffersContext } from '../../context/OffersContext';
 
@@ -7,6 +7,7 @@ const ClearFiltersBtn = () => {
     useContext(OffersContext);
 
   const handleClearingFilters = () => {
+    window.history.pushState('', '', window.location.pathname);
     setFilteredOffers(offerData);
     setFilters({});
   };

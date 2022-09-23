@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Filters from '../filters/Filters';
 import FeaturedOffers from '../featured-offers/FeaturedOffers';
 import NewVehiclesOffers from '../new-vehicles-offers/NewVehiclesOffers';
+import { OffersContext } from '../../context/OffersContext';
+import VehicleOfferItem from '../vehicle-offer-item/VehicleOfferItem';
 
 const Tabs = () => {
   const [openTab, setOpenTab] = React.useState(1);
+  const { filteredOffers } = useContext(OffersContext);
+
   return (
     <>
       <div className="flex flex-wrap">
@@ -15,9 +19,9 @@ const Tabs = () => {
           >
             <li className="flex-auto text-center w-1/2">
               <a
-                className={`text-xl break-words md:text-3xl inline-block leading-normal ${
+                className={`text-xl relative break-words md:text-3xl inline-block leading-normal ${
                   openTab === 1
-                    ? 'text-blue-600 border-b-3 border-b-blue-600'
+                    ? 'text-primary border-b-3 border-b-primary after:content-[""] after:w-0 after:h-0 after:absolute after:top-full after:ml-[-3px] after:left-1/2 after:border-solid after:border-t-[6px] after:border-r-[6.5px] after:border-b-[0] after:border-l-[6.5px] after:border-t-[#176db7] after:border-r-transparent after:border-b-transparent after:border-l-transparent'
                     : 'text-gray-400'
                 }`}
                 onClick={(e) => {
@@ -32,9 +36,9 @@ const Tabs = () => {
             </li>
             <li className="flex-auto text-center w-1/2">
               <a
-                className={`text-xl md:text-3xl inline-block leading-normal ${
+                className={`text-xl relative md:text-3xl inline-block leading-normal ${
                   openTab === 2
-                    ? 'text-blue-600 border-b-2 border-b-blue-600'
+                    ? 'text-primary border-b-3 border-b-primary after:content-[""] after:w-0 after:h-0 after:absolute after:top-full after:ml-[-3px] after:left-1/2 after:border-solid after:border-t-[6px] after:border-r-[6.5px] after:border-b-[0] after:border-l-[6.5px] after:border-t-[#176db7] after:border-r-transparent after:border-b-transparent after:border-l-transparent'
                     : 'text-gray-400'
                 }`}
                 onClick={(e) => {
@@ -51,10 +55,7 @@ const Tabs = () => {
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6">
             <div className="py-5 flex-auto">
               <div className="tab-content tab-space">
-                <div
-                  className={openTab === 1 ? 'block' : 'hidden'}
-                  id="new-car-offers"
-                >
+                <div className={openTab === 1 ? 'block' : 'hidden'}>
                   <Filters />
                   <FeaturedOffers />
                   <br />
@@ -64,15 +65,14 @@ const Tabs = () => {
                   className={openTab === 2 ? 'block' : 'hidden'}
                   id="certified-pre-owned"
                 >
-                  <p>
-                    Completely synergize resource taxing relationships via
-                    premier niche markets. Professionally cultivate one-to-one
-                    customer service with robust ideas.
-                    <br />
-                    <br />
-                    Dynamically innovate resource-leveling customer service for
-                    state of the art customer service.
-                  </p>
+                  {filteredOffers
+                    ?.filter((o) => o.type === 'used')
+                    .map((offer, idx) => (
+                      <VehicleOfferItem
+                        key={`${offer.name}-${idx}`}
+                        offer={offer}
+                      />
+                    ))}
                 </div>
               </div>
             </div>
