@@ -7,8 +7,11 @@ import VehicleOfferItem from '../vehicle-offer-item/VehicleOfferItem';
 
 const Tabs = () => {
   const [openTab, setOpenTab] = React.useState(1);
-  const { offerData } = useContext(OffersContext);
+  const params = window.location.search;
+  const { offerData, filters } = useContext(OffersContext);
 
+  const isFilterApplied =
+    Object.values(filters).flat().length > 0 && params.length;
   return (
     <>
       <div className="flex flex-wrap">
@@ -57,7 +60,8 @@ const Tabs = () => {
               <div className="tab-content tab-space">
                 <div className={openTab === 1 ? 'block' : 'hidden'}>
                   <Filters />
-                  <FeaturedOffers />
+                  {!isFilterApplied && <FeaturedOffers />}
+
                   <br />
                   <NewVehiclesOffers />
                 </div>

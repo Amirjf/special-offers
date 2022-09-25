@@ -9,7 +9,7 @@ import FilterContent from '../filter-content/FilterContent';
 import AppliedFilterNumbers from '../applied-filter-numbers/AppliedFilterNumbers';
 
 const Filters = () => {
-  const { isAnyFilterApplied, filters, handleApplyingFilters } =
+  const { isAnyFilterApplied, handleApplyingFilters } =
     useContext(OffersContext);
 
   const [showFilters, setShowFilters] = useState(false);
@@ -66,6 +66,21 @@ const Filters = () => {
           <AppliedFilters />
 
           <FilterContent handleShowFilterDrawer={handleShowFilterDrawer} />
+          {isAnyFilterApplied() && (
+            <div className="hidden sm:flex sm:justify-end sm:py-4">
+              <Button
+                disabled={!isAnyFilterApplied()}
+                variant="primary"
+                size="small"
+                onClick={() => {
+                  handleShowFilterDrawer();
+                  handleApplyingFilters();
+                }}
+              >
+                View Result
+              </Button>
+            </div>
+          )}
 
           <div className="flex justify-center m-4 md:hidden">
             <Button

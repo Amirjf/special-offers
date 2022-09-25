@@ -1,24 +1,39 @@
 import React, { useState } from 'react';
-import Modal from '../modal/Modal';
-import VehicleDisclaimer from '../vehicle-disclaimer/VehicleDisclaimer';
+import { ReactComponent as XIcon } from '../../assets/icons/x.svg';
 
 const FeatureOfferItem = ({ featuredOffer }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
 
   const {
     image,
     lease_due_at_signing,
     disclaimer,
-    price_label,
     lease_pay_months,
-    price,
     lease_monthly_pay,
     title,
   } = featuredOffer;
 
   return (
     <>
-      <div className="border-[1px] rounded-sm py-4">
+      <div className="border-[1px] relative rounded-sm py-4">
+        {showDisclaimer && (
+          <div className="absolute bg-[#ffffff84] backdrop-blur-md inset-0 overflow-hidden overflow-y-auto text-[11px] text-justify p-2">
+            <div>
+              <span className="w-full font-semibold text-sm">
+                Lease disclaimer
+              </span>
+              <div
+                className="absolute rounded-full top-1 right-1 cursor-pointer hover:bg-primary hover:text-white"
+                onClick={() => setShowDisclaimer(false)}
+              >
+                <XIcon className="w-5 h-5 text-lg" />
+              </div>
+            </div>
+
+            {disclaimer}
+          </div>
+        )}
+
         <div className="w-full">
           <img className="w-full mb-4" src={image} alt="offer-image" />
         </div>
@@ -36,21 +51,19 @@ const FeatureOfferItem = ({ featuredOffer }) => {
         <div className="text-center pt-4">
           <button
             className="text-sm  text-primary"
-            onClick={() => {
-              setShowModal(true);
-            }}
+            onClick={() => setShowDisclaimer(!showDisclaimer)}
           >
             Offer Details
           </button>
         </div>
       </div>
-      {showModal && (
+      {/* {showModal && (
         <Modal
           title={title}
           content={<VehicleDisclaimer content={disclaimer} />}
           setOpenModal={setShowModal}
         />
-      )}
+      )} */}
     </>
   );
 };

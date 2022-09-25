@@ -7,6 +7,7 @@ export const OffersContext = createContext({});
 
 export const OffersProvider = ({ children }) => {
   const [filters, setFilters] = useState({});
+
   const [offerData, setOfferData] = useState(OFFERS);
   const [filteredOffers, setFilteredOffers] = useState(OFFERS);
   const [onFiltersApplied, setOnFiltersApplied] = useState(false);
@@ -66,6 +67,14 @@ export const OffersProvider = ({ children }) => {
 
     setFilteredOffers(result);
     setOnFiltersApplied(!onFiltersApplied);
+    addFiltersToUrl();
+  };
+
+  const addFiltersToUrl = () => {
+    const shallowEncoded = queryString.stringify(filters, {
+      arrayFormat: 'comma',
+    });
+    window.history.pushState({}, 'filters', '?' + shallowEncoded);
   };
 
   const removeFilters = (filterToRemove) => {
@@ -74,6 +83,7 @@ export const OffersProvider = ({ children }) => {
     );
   };
 
+  //Handly applying filters by url
   useEffect(() => {
     const filterParams = queryString.parse(window.location.search, {
       arrayFormat: 'comma',
@@ -96,13 +106,6 @@ export const OffersProvider = ({ children }) => {
   useEffect(() => {
     handleApplyingFilters();
   }, [isAppliedFiltersByUrl]);
-
-  useEffect(() => {
-    const shallowEncoded = queryString.stringify(filters, {
-      arrayFormat: 'comma',
-    });
-    window.history.pushState({}, 'filters', '?' + shallowEncoded);
-  }, [filters]);
 
   const value = {
     offerData,

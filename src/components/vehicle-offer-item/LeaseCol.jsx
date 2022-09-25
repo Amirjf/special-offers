@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactComponent as InfoIcon } from '../../assets/icons/info.svg';
 
 const LeaseCol = ({ LeaseMonthlyPrice, payPerMonths, leaseAtSigning }) => {
   return (
@@ -26,11 +25,6 @@ const LeaseCol = ({ LeaseMonthlyPrice, payPerMonths, leaseAtSigning }) => {
             <div>
               <span className="flex font-normal">
                 <span className="text-3xl">{`$${leaseAtSigning}`}</span>
-                {/* <Tippy content="Hello" placement="bottom" trigger="click" arrow> */}
-                <span className="cursor-pointer">
-                  <InfoIcon className="w-5" />
-                </span>
-                {/* </Tippy> */}
               </span>
             </div>
             <div>

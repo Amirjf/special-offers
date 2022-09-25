@@ -9,12 +9,12 @@ export const cls = (input) =>
     .trim();
 
 const classes = {
-  base: 'focus:outline-none transition ease-in-out duration-150 flex items-center gap-x-4 justify-center',
+  base: 'focus:outline-none transition ease-in-out font-semibold duration-150 flex items-center gap-x-4 justify-center rounded-sm',
   disabled: 'opacity-50 cursor-not-allowed',
   pill: 'rounded-full',
   fullWidth: 'w-full',
   size: {
-    small: 'px-2 py-1 text-sm',
+    small: 'px-6 py-1 text-sm',
     normal: 'px-10 py-2',
     large: 'px-5 py-3 text-md',
   },

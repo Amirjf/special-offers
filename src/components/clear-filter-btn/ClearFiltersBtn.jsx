@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Button from '../button/Button';
 import { OffersContext } from '../../context/OffersContext';
 
 const ClearFiltersBtn = () => {
@@ -15,10 +14,8 @@ const ClearFiltersBtn = () => {
   return (
     <>
       {isAnyFilterApplied() ? (
-        <div>
-          <Button variant="text" fullWidth onClick={handleClearingFilters}>
-            Clear filters
-          </Button>
+        <div className="text-primary flex items-center ml-5 sm:ml-0 font-semibold">
+          <button onClick={handleClearingFilters}>Clear all</button>
         </div>
       ) : (
         ''

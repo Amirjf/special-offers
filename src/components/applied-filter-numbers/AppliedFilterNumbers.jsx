@@ -8,7 +8,7 @@ const AppliedFilterNumbers = () => {
 
   if (numberOfFilters) {
     return (
-      <div className="bg-[#176db7] w-6 h-6 rounded-full flex items-center justify-center text-white">{`${numberOfFilters}`}</div>
+      <div className="bg-[#176db7] w-6 h-6 rounded-full flex items-center justify-center text-white text-[13px]">{`${numberOfFilters}`}</div>
     );
   }
 };

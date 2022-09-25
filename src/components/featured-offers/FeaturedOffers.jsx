@@ -6,8 +6,15 @@ import Heading from '../heading/Heading';
 const FeaturedOffers = () => {
   const { offerData } = useContext(OffersContext);
 
-  const featuredOffers = offerData.slice(0, 3);
-  console.log(featuredOffers);
+  const featuredOffers = offerData.filter((offer) => {
+    if (
+      offer.title === '2022 GLC 300 SUV' ||
+      offer.title === '2022 GLE 350 SUV' ||
+      offer.title === '2022 EQS 450+ Sedan'
+    ) {
+      return offer;
+    }
+  });
   return (
     <section>
       <Heading title="Featured Offers" />
