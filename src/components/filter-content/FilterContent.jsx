@@ -21,8 +21,9 @@ const FilterContent = () => {
   return (
     <div>
       <div className="hidden md:grid grid-cols-1 md:grid-cols-4 gap-x-5">
-        {FILTERS.map((filterItem) => (
+        {FILTERS.map((filterItem, idx) => (
           <Button
+            key={idx}
             variant="outlined"
             icon={
               selectedFilter === filterItem.value ? <ChevUp /> : <ChevDown />

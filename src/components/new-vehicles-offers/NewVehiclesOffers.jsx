@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import VehicleOfferItem from '../vehicle-offer-item/VehicleOfferItem';
 import { OffersContext } from '../../context/OffersContext';
 const NewVehiclesOffers = () => {
-  const { offerData, filteredOffers } = useContext(OffersContext);
+  const { filteredOffers } = useContext(OffersContext);
 
   return (
     <>

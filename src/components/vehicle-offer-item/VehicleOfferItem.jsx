@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import Tippy from '@tippyjs/react';
-import { ReactComponent as InfoIcon } from '../../assets/icons/info.svg';
 import { ReactComponent as ChevUp } from '../../assets/icons/chevron-up.svg';
 import { ReactComponent as ChevDown } from '../../assets/icons/chevron-down.svg';
 import VehicleDisclaimer from '../vehicle-disclaimer/VehicleDisclaimer';
-import 'tippy.js/dist/tippy.css';
 import LeaseCol from './LeaseCol';
 import FinanceApr from './FinanceApr';
 
@@ -17,15 +14,13 @@ const VehicleOfferItem = ({ offer }) => {
     disclaimer,
     price_label,
     lease_pay_months,
-    name,
     price,
-    year,
-    model,
     lease_monthly_pay,
     finance_apr,
     finance_apr_months,
-    make,
     title,
+    custom_HTML,
+    adds_info,
   } = offer;
 
   const showDislaimer = () => {
@@ -33,7 +28,7 @@ const VehicleOfferItem = ({ offer }) => {
   };
   return (
     <div className="border-b-1 py-5">
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row relative">
         <div className="w-full md:w-1/2 md:pr-5">
           <img className="w-full" src={image} />
         </div>
@@ -43,12 +38,32 @@ const VehicleOfferItem = ({ offer }) => {
             {price && (
               <div>
                 {price_label}
-                <span className="font-semibold">{`$${price}`}</span>
+                <span className="font-semibold">{` $${price}`}</span>
               </div>
             )}
           </div>
-          <div className="flex flex-wrap gap-x-20">
-            {lease_pay_months && (
+          <div
+            onClick={showDislaimer}
+            className="ml-auto cursor-pointer order-3 flex items-center justify-center text-center w-full md:w-auto  my-5 md:absolute md:right-0"
+          >
+            <button className="text-md text-primary">Offer Details</button>
+            <span className="text-primary pt-1 pl-1 ">
+              {showDisclaimer ? <ChevUp /> : <ChevDown />}
+            </span>
+          </div>
+          <div className="flex flex-wrap">
+            {custom_HTML ? (
+              <div className="flex flex-col md:flex-row">
+                <div
+                  className="font-semibold text-lg w-full md:w-1/3"
+                  dangerouslySetInnerHTML={{ __html: custom_HTML }}
+                ></div>
+                <div
+                  className="text-md w-full md:w-1/2"
+                  dangerouslySetInnerHTML={{ __html: adds_info }}
+                ></div>
+              </div>
+            ) : (
               <LeaseCol
                 LeaseMonthlyPrice={lease_monthly_pay}
                 payPerMonths={lease_pay_months}
@@ -56,22 +71,12 @@ const VehicleOfferItem = ({ offer }) => {
               />
             )}
 
-            {finance_apr && (
+            {finance_apr && !custom_HTML && (
               <FinanceApr
                 financeRate={finance_apr}
                 financePerMonths={finance_apr_months}
               />
             )}
-
-            <div
-              onClick={showDislaimer}
-              className="ml-auto cursor-pointer flex items-center justify-center text-center w-full md:w-auto  my-5"
-            >
-              <button className="text-lg text-primary">Offer Details</button>
-              <span className="text-primary pt-1 pl-1 ">
-                {showDisclaimer ? <ChevUp /> : <ChevDown />}
-              </span>
-            </div>
           </div>
         </div>
       </div>

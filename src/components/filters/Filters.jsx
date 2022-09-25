@@ -19,7 +19,7 @@ const Filters = () => {
   };
 
   return (
-    <div className="sticky top-0 pt-5 bg-white">
+    <div className="sticky top-0 pt-5 bg-white z-50">
       <div className="flex gap-5 mb-0 md:mb-5">
         <div>
           <Button

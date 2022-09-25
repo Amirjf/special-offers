@@ -7,14 +7,14 @@ import VehicleOfferItem from '../vehicle-offer-item/VehicleOfferItem';
 
 const Tabs = () => {
   const [openTab, setOpenTab] = React.useState(1);
-  const { filteredOffers } = useContext(OffersContext);
+  const { offerData } = useContext(OffersContext);
 
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full">
           <ul
-            className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row sm:divide-x"
+            className="flex mb-0 list-none flex-wrap mt-10 pb-4 flex-row sm:divide-x-1"
             role="tablist"
           >
             <li className="flex-auto text-center w-1/2">
@@ -41,7 +41,7 @@ const Tabs = () => {
                     ? 'text-primary border-b-3 border-b-primary after:content-[""] after:w-0 after:h-0 after:absolute after:top-full after:ml-[-3px] after:left-1/2 after:border-solid after:border-t-[6px] after:border-r-[6.5px] after:border-b-[0] after:border-l-[6.5px] after:border-t-[#176db7] after:border-r-transparent after:border-b-transparent after:border-l-transparent'
                     : 'text-gray-400'
                 }`}
-                onClick={(e) => {
+                onClick={() => {
                   setOpenTab(2);
                 }}
                 data-toggle="tab"
@@ -65,7 +65,7 @@ const Tabs = () => {
                   className={openTab === 2 ? 'block' : 'hidden'}
                   id="certified-pre-owned"
                 >
-                  {filteredOffers
+                  {offerData
                     ?.filter((o) => o.type === 'used')
                     .map((offer, idx) => (
                       <VehicleOfferItem

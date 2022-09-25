@@ -16,6 +16,7 @@ const ModelFilter = () => {
   };
 
   const getModels = [...new Set(filteredOffers.map((offer) => offer.model))];
+
   return (
     <div>
       <FilterContentHeading title="Model" />

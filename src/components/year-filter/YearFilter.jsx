@@ -15,7 +15,9 @@ const YearFilter = () => {
     }
   };
 
-  const getYears = [...new Set(filteredOffers.map((offer) => offer.year))];
+  const getYears = [
+    ...new Set(filteredOffers.map((offer) => offer.year.toString())),
+  ];
 
   return (
     <div>
