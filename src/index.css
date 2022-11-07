@@ -10,6 +10,12 @@
   -webkit-text-size-adjust: 100%;
 }
 
+@layer components {
+  .customHidden {
+    display: none;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -22,4 +28,20 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .md\:grid {
+    display: grid !important;
+  }
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  width: 25px;
+  height: 25px;
+}
+
+svg {
+  fill: none !important;
 }

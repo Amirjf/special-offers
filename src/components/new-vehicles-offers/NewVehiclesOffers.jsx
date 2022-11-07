@@ -6,9 +6,11 @@ const NewVehiclesOffers = () => {
 
   return (
     <>
-      {filteredOffers.map((offer, idx) => (
-        <VehicleOfferItem key={`${offer.name}-${idx}`} offer={offer} />
-      ))}
+      {filteredOffers
+        .filter((allOffer) => allOffer.type !== 'used')
+        .map((offer, idx) => (
+          <VehicleOfferItem key={`${offer.name}-${idx}`} offer={offer} />
+        ))}
     </>
   );
 };

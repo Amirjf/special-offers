@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ReactComponent as XIcon } from '../../assets/icons/x.svg';
+import { handleShowingTextWithTradeMark } from '../../utils/utils';
 
 const FeatureOfferItem = ({ featuredOffer }) => {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
@@ -38,7 +39,9 @@ const FeatureOfferItem = ({ featuredOffer }) => {
           <img className="w-full mb-4" src={image} alt="offer-image" />
         </div>
         <div className="p-x-2 text-center">
-          <div className="text-xl font-normal h-12">{title}</div>
+          <div className="text-xl font-normal h-12">
+            {handleShowingTextWithTradeMark(title)}
+          </div>
           <hr className="mb-2 w-8 mx-auto" />
         </div>
         <div className="text-center font-normal flex flex-col gap-y-2">

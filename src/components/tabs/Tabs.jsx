@@ -58,7 +58,7 @@ const Tabs = () => {
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6">
             <div className="py-5 flex-auto">
               <div className="tab-content tab-space">
-                <div className={openTab === 1 ? 'block' : 'hidden'}>
+                <div className={openTab === 1 ? 'block' : 'customHidden'}>
                   <Filters />
                   {!isFilterApplied && <FeaturedOffers />}
 
@@ -66,7 +66,7 @@ const Tabs = () => {
                   <NewVehiclesOffers />
                 </div>
                 <div
-                  className={openTab === 2 ? 'block' : 'hidden'}
+                  className={openTab === 2 ? 'block' : 'customHidden'}
                   id="certified-pre-owned"
                 >
                   {offerData
