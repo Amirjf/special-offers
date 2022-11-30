@@ -16,7 +16,7 @@ const BodyFilter = () => {
   };
 
   const getBodyStyles = [
-    ...new Set(filteredOffers.map((offer) => offer.body_style)),
+    ...new Set(filteredOffers.map((offer) => offer.body_style).filter(Boolean)),
   ];
 
   return (

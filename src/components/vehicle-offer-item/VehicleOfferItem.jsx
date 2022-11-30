@@ -4,7 +4,6 @@ import { ReactComponent as ChevDown } from '../../assets/icons/chevron-down.svg'
 import VehicleDisclaimer from '../vehicle-disclaimer/VehicleDisclaimer';
 import LeaseCol from './LeaseCol';
 import FinanceApr from './FinanceApr';
-import { handleShowingTextWithTradeMark } from '../../utils/utils';
 
 const VehicleOfferItem = ({ offer }) => {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
@@ -38,7 +37,7 @@ const VehicleOfferItem = ({ offer }) => {
             <div
               className="text-xl font-normal"
               dangerouslySetInnerHTML={{
-                __html: `${handleShowingTextWithTradeMark(title)}`,
+                __html: title,
               }}
             ></div>
             {price && (
