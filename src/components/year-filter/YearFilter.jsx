@@ -16,7 +16,7 @@ const YearFilter = () => {
   };
 
   const getYears = [
-    ...new Set(filteredOffers.map((offer) => offer.year.toString())),
+    ...new Set(filteredOffers.map((offer) => offer.year).filter(Boolean)),
   ];
 
   return (

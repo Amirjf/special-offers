@@ -21,22 +21,24 @@ const TypeFilter = () => {
     <div>
       <FilterContentHeading title="Car Types" />
       <div className="grid grid-cols-2 md:grid-cols-3">
-        {getTypes.map((carType, idx) => {
-          if (carType) {
-            return (
-              <div key={idx} className="pb-2">
-                <Checkbox
-                  onChange={handleChange}
-                  label={carType.toUpperCase()}
-                  id={carType}
-                  name={carType}
-                  value={carType}
-                  checked={filters['type']?.includes(carType) ? true : false}
-                />
-              </div>
-            );
-          }
-        })}
+        {getTypes
+          .filter((type) => type !== 'used')
+          .map((carType, idx) => {
+            if (carType) {
+              return (
+                <div key={idx} className="pb-2">
+                  <Checkbox
+                    onChange={handleChange}
+                    label={carType.toUpperCase()}
+                    id={carType}
+                    name={carType}
+                    value={carType}
+                    checked={filters['type']?.includes(carType) ? true : false}
+                  />
+                </div>
+              );
+            }
+          })}
       </div>
     </div>
   );

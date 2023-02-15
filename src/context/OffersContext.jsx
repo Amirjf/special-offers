@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import OFFERS from '../../data/OFFERS2.json';
 import { addFilter, removeFilter } from './utils/utils';
 import queryString from 'query-string';
 
@@ -7,9 +6,9 @@ export const OffersContext = createContext({});
 
 export const OffersProvider = ({ children }) => {
   const [filters, setFilters] = useState({});
-
-  const [offerData, setOfferData] = useState(OFFERS);
-  const [filteredOffers, setFilteredOffers] = useState(OFFERS);
+  const [offerData, setOfferData] = useState();
+  const [filteredOffers, setFilteredOffers] = useState();
+  const [loading, setLoading] = useState(false);
   const [onFiltersApplied, setOnFiltersApplied] = useState(false);
   const [isAppliedFiltersByUrl, setIsAppliedFiltersByUrl] = useState({});
   const addFilters = (filterToAdd) => {
@@ -36,45 +35,47 @@ export const OffersProvider = ({ children }) => {
 
     result = offerData;
 
-    const getAppliedModels = filters.model;
+    if (result) {
+      const getAppliedModels = filters.model;
 
-    const getAppliedYears = filters.year;
+      const getAppliedYears = filters.year;
 
-    const getAppliedBodyStyles = filters.body;
-    const getAppliedTypes = filters.type;
+      const getAppliedBodyStyles = filters.body;
+      const getAppliedTypes = filters.type;
 
-    if (getAppliedModels) {
-      result = result.filter((offer) =>
-        getAppliedModels?.includes(offer.model)
-      );
+      if (getAppliedModels) {
+        result = result.filter((offer) =>
+          getAppliedModels?.includes(offer.model)
+        );
+      }
+
+      if (getAppliedYears) {
+        result = result.filter((offer) => getAppliedYears.includes(offer.year));
+      }
+      if (getAppliedBodyStyles) {
+        result = result.filter((offer) =>
+          getAppliedBodyStyles.includes(offer.body_style)
+        );
+      }
+      if (getAppliedTypes) {
+        result = result.filter((offer) => getAppliedTypes.includes(offer.type));
+      }
+
+      setFilteredOffers(result);
+      setOnFiltersApplied(!onFiltersApplied);
+      addFiltersToUrl();
     }
-
-    if (getAppliedYears) {
-      result = result.filter((offer) =>
-        getAppliedYears.includes(offer.year.toString())
-      );
-    }
-    if (getAppliedBodyStyles) {
-      result = result.filter((offer) =>
-        getAppliedBodyStyles.includes(offer.body_style.toString())
-      );
-    }
-    if (getAppliedTypes) {
-      result = result.filter((offer) =>
-        getAppliedTypes.includes(offer.type.toString())
-      );
-    }
-
-    setFilteredOffers(result);
-    setOnFiltersApplied(!onFiltersApplied);
-    addFiltersToUrl();
   };
 
   const addFiltersToUrl = () => {
     const shallowEncoded = queryString.stringify(filters, {
       arrayFormat: 'comma',
     });
-    window.history.pushState({}, 'filters', '?' + shallowEncoded);
+    window.history.pushState(
+      {},
+      'filters',
+      '' + `${shallowEncoded.length > 0 ? `?${shallowEncoded}` : ''}`
+    );
   };
 
   const removeFilters = (filterToRemove) => {
@@ -83,11 +84,28 @@ export const OffersProvider = ({ children }) => {
     );
   };
 
+  useEffect(() => {
+    const fetchOffers = async () => {
+      setLoading(true);
+      const res = await fetch(
+        //mercedesbenzspokane
+        'https://api.dealertower.com/mercedes-benz/incentives/mercedesbenzmarin'
+      );
+      const { data } = await res.json();
+      setOfferData(data);
+      setFilteredOffers(data);
+      setLoading(false);
+    };
+
+    fetchOffers();
+  }, []);
+
   //Handly applying filters by url
   useEffect(() => {
     const filterParams = queryString.parse(window.location.search, {
       arrayFormat: 'comma',
     });
+
     if (Object.values(filterParams).length) {
       for (const [key, values] of Object.entries(filterParams)) {
         if (Array.isArray(values)) {

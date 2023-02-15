@@ -35,7 +35,13 @@ const FeatureOfferItem = ({ featuredOffer }) => {
         )}
 
         <div className="w-full">
-          <img className="w-full mb-4" src={image} alt="offer-image" />
+          <img
+            width={400}
+            height={300}
+            className="w-full mb-4"
+            src={image}
+            alt="offer-image"
+          />
         </div>
         <div className="p-x-2 text-center">
           <div className="text-xl font-normal h-12">{title}</div>

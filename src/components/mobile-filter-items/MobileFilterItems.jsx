@@ -6,8 +6,9 @@ const MobileFilterItems = ({ selectedFilter, handleSelectedFilter }) => {
   return (
     <>
       <div className="flex flex-col md:hidden">
-        {FILTERS.map((filterItem) => (
+        {FILTERS.map((filterItem, idx) => (
           <button
+            key={`${filterItem.value}-${idx}`}
             isActive={selectedFilter === filterItem.value}
             onClick={() => handleSelectedFilter(filterItem.value)}
             className="flex justify-between items-center px-2 font-semibold text-lg border-b-1 py-4"

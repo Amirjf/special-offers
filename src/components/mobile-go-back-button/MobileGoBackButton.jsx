@@ -6,7 +6,7 @@ const MobileGoBackButton = ({ selectedFilter, handleSelectedFilter }) => {
     <button
       isActive={selectedFilter === 'model'}
       onClick={() => handleSelectedFilter('')}
-      className="md:hidden w-full flex text-blue-600 gap-x-3  items-center px-2 font-semibold text-lg border-b-2 border-b-blue-600 py-4"
+      className="md:customHidden w-full flex text-blue-600 gap-x-3  items-center px-2 font-semibold text-lg border-b-2 border-b-blue-600 py-4"
     >
       <ChevLeft />
       Go back

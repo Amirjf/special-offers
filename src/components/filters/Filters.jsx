@@ -56,7 +56,7 @@ const Filters = () => {
         <div className="bg-white fixed w-full inset-0 h-full md:static md:w-auto md:h:auto">
           <div
             onClick={handleShowFilterDrawer}
-            className="md:hidden w-full bg-black h-10 flex align-center justify-end"
+            className="md:customHidden w-full bg-black h-10 flex align-center justify-end"
           >
             <button className="text-white mr-3">
               <XIcon />
@@ -67,7 +67,7 @@ const Filters = () => {
 
           <FilterContent handleShowFilterDrawer={handleShowFilterDrawer} />
           {isAnyFilterApplied() && (
-            <div className="hidden sm:flex sm:justify-end sm:py-4">
+            <div className="customHidden sm:flex sm:justify-end sm:py-4">
               <Button
                 disabled={!isAnyFilterApplied()}
                 variant="primary"

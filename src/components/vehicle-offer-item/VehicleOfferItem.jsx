@@ -34,7 +34,12 @@ const VehicleOfferItem = ({ offer }) => {
         </div>
         <div className="flex flex-col w-full justify-center">
           <div className="w-full pb-6">
-            <div className="text-xl font-normal">{`${title}`}</div>
+            <div
+              className="text-xl font-normal"
+              dangerouslySetInnerHTML={{
+                __html: title,
+              }}
+            ></div>
             {price && (
               <div>
                 {price_label}
@@ -59,7 +64,7 @@ const VehicleOfferItem = ({ offer }) => {
                   dangerouslySetInnerHTML={{ __html: custom_HTML }}
                 ></div>
                 <div
-                  className="text-md w-full md:w-1/2"
+                  className="text-md w-full md:pl-2 md:w-1/2"
                   dangerouslySetInnerHTML={{ __html: adds_info }}
                 ></div>
               </div>
