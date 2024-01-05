@@ -2,7 +2,7 @@ import React from 'react';
 
 const FinanceApr = ({ financeRate, financePerMonths }) => {
   return (
-    <div>
+    <div className="pr-4">
       <span className="text-sm">Finance Rate</span>
       <div className="flex flex-col">
         <div>

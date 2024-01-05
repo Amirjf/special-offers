@@ -1,11 +1,31 @@
 export const handleShowingTextWithTradeMark = (term) => {
-  let fillTitle = term;
-  if (fillTitle.includes('4MATIC')) {
-    fillTitle = fillTitle.replace('4MATIC', '4MATIC&#174;');
+  let fullTitle = term;
+
+  if (fullTitle.includes('4MATIC') && !fullTitle.includes('®')) {
+    fullTitle = fullTitle.replace(
+      '4MATIC',
+      '4MATIC<sub style="vertical-align: super;margin-left: 2px;">®</sub>'
+    );
   }
-  if (fillTitle.includes('AMG')) {
-    fillTitle = fillTitle.replace('AMG', 'AMG&#174;');
+  if (fullTitle.includes('4matic') && !fullTitle.includes('®')) {
+    fullTitle = fullTitle.replace(
+      '4matic',
+      '4MATIC<sub style="vertical-align: super;margin-left: 2px;">®</sub>'
+    );
   }
 
-  return fillTitle;
+  if (fullTitle.includes('AMG') && !fullTitle.includes('®')) {
+    fullTitle = fullTitle.replace(
+      'AMG',
+      'AMG<sub style="vertical-align: super;margin-left: 2px;">®</sub>'
+    );
+  }
+  if (fullTitle.includes('amg') && !fullTitle.includes('®')) {
+    fullTitle = fullTitle.replace(
+      'amg',
+      'AMG<sub style="vertical-align: super;margin-left: 2px;">®</sub>'
+    );
+  }
+
+  return fullTitle;
 };

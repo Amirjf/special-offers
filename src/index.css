@@ -45,3 +45,11 @@ input[type='radio'] {
 svg {
   fill: none !important;
 }
+
+.specials-disclaimer a {
+  font-weight: bold;
+}
+.specials-disclaimer h2 {
+  padding-top: 1rem;
+  padding-bottom: 0.2rem;
+}
