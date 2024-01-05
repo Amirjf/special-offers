@@ -4,6 +4,7 @@ import { ReactComponent as ChevDown } from '../../assets/icons/chevron-down.svg'
 import VehicleDisclaimer from '../vehicle-disclaimer/VehicleDisclaimer';
 import LeaseCol from './LeaseCol';
 import FinanceApr from './FinanceApr';
+import { handleShowingTextWithTradeMark } from '../../utils/utils';
 
 const VehicleOfferItem = ({ offer }) => {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
@@ -18,9 +19,8 @@ const VehicleOfferItem = ({ offer }) => {
     lease_monthly_pay,
     finance_apr,
     finance_apr_months,
+    additional_info,
     title,
-    custom_HTML,
-    adds_info,
   } = offer;
 
   const showDislaimer = () => {
@@ -37,7 +37,7 @@ const VehicleOfferItem = ({ offer }) => {
             <div
               className="text-xl font-normal"
               dangerouslySetInnerHTML={{
-                __html: title,
+                __html: handleShowingTextWithTradeMark(title),
               }}
             ></div>
             {price && (
@@ -56,31 +56,24 @@ const VehicleOfferItem = ({ offer }) => {
               {showDisclaimer ? <ChevUp /> : <ChevDown />}
             </span>
           </div>
-          <div className="flex flex-wrap">
-            {custom_HTML ? (
-              <div className="flex flex-col md:flex-row">
-                <div
-                  className="font-semibold text-lg w-full md:w-1/3"
-                  dangerouslySetInnerHTML={{ __html: custom_HTML }}
-                ></div>
-                <div
-                  className="text-md w-full md:pl-2 md:w-1/2"
-                  dangerouslySetInnerHTML={{ __html: adds_info }}
-                ></div>
-              </div>
-            ) : (
-              <LeaseCol
-                LeaseMonthlyPrice={lease_monthly_pay}
-                payPerMonths={lease_pay_months}
-                leaseAtSigning={lease_due_at_signing}
-              />
-            )}
+          <div className="flex justify-start flex-wrap">
+            <LeaseCol
+              LeaseMonthlyPrice={lease_monthly_pay}
+              payPerMonths={lease_pay_months}
+              leaseAtSigning={lease_due_at_signing}
+            />
 
-            {finance_apr && !custom_HTML && (
+            {finance_apr && (
               <FinanceApr
                 financeRate={finance_apr}
                 financePerMonths={finance_apr_months}
               />
+            )}
+            {additional_info && (
+              <div
+                className="text-md md:pl-2 md:w-1/2"
+                dangerouslySetInnerHTML={{ __html: additional_info }}
+              ></div>
             )}
           </div>
         </div>

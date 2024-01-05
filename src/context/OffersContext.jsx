@@ -89,7 +89,10 @@ export const OffersProvider = ({ children }) => {
       setLoading(true);
       const res = await fetch(
         //mercedesbenzspokane
-        'https://api.dealertower.com/mercedes-benz/incentives/mercedesbenzmarin'
+        //mercedesbenzseatle
+        //sprinterseatlle
+        //sprinterswilsonville
+        'https://api.dealertower.com/mercedes-benz/incentives/sprinterswilsonville'
       );
       const { data } = await res.json();
       setOfferData(data);
